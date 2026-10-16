@@ -1,0 +1,12 @@
+{
+  "name": "kpo",
+  "private": true,
+  "description": "Commit message checks for the fitness-center repository.",
+  "scripts": {
+    "commitlint": "commitlint --edit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1"
+  }
+}

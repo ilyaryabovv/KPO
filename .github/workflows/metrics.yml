@@ -1,0 +1,43 @@
+name: Metrics
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: Stage name
+        required: true
+        default: infrastructure
+      since:
+        description: Period start, YYYY-MM-DD
+        required: true
+        default: "2026-10-15"
+      until:
+        description: Period end, YYYY-MM-DD
+        required: true
+        default: "2026-10-16"
+
+jobs:
+  collect:
+    name: collect
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+        working-directory: client
+      - name: Collect metrics
+        shell: pwsh
+        run: ./scripts/collect-metrics.ps1 -Stage "${{ inputs.stage }}" -Since "${{ inputs.since }}" -Until "${{ inputs.until }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: metrics-${{ inputs.stage }}
+          path: docs/metrics/${{ inputs.stage }}.json
