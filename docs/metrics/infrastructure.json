@@ -1,0 +1,18 @@
+﻿{
+    "stage":  "infrastructure",
+    "measured_at":  "2026-10-16",
+    "period_since":  "2026-10-15",
+    "period_until":  "2026-10-17",
+    "lint_errors":  0,
+    "lint_warnings":  0,
+    "server_line_coverage_percent":  100,
+    "server_branch_coverage_percent":  89.28,
+    "client_line_coverage_percent":  100,
+    "client_branch_coverage_percent":  100,
+    "tests_passed":  11,
+    "tests_failed":  0,
+    "test_duration_sec":  18.9,
+    "commits_in_period":  6,
+    "pipeline_duration_sec":  104.47,
+    "note":  "Local snapshot. Pipeline duration here is the collection script runtime. On GitHub Actions the metrics job overwrites it with the workflow runtime."
+}
