@@ -113,6 +113,16 @@ if (Test-Path (Join-Path $root "client/angular.json")) {
         $clientLine = [math]::Round([double]$summary.total.lines.pct, 2)
         $clientBranch = [math]::Round([double]$summary.total.branches.pct, 2)
     }
+    if ($null -eq $clientLine) {
+        $lineMatch = [regex]::Match($clientOutput, "Lines\s+:\s+([0-9]+(?:[.,][0-9]+)?)%")
+        $branchMatch = [regex]::Match($clientOutput, "Branches\s+:\s+([0-9]+(?:[.,][0-9]+)?)%")
+        if ($lineMatch.Success) {
+            $clientLine = [double]($lineMatch.Groups[1].Value.Replace(",", "."))
+        }
+        if ($branchMatch.Success) {
+            $clientBranch = [double]($branchMatch.Groups[1].Value.Replace(",", "."))
+        }
+    }
 }
 
 $commitLines = @(git -C $root log --since="$Since" --until="$Until" --pretty=format:"%h")
