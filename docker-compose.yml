@@ -1,0 +1,7 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: server/FitnessCenter.Api/Dockerfile
+    ports:
+      - "8080:8080"
