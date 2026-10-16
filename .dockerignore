@@ -1,0 +1,11 @@
+**/.git
+**/.vs
+**/bin
+**/obj
+**/node_modules
+**/TestResults
+**/coverage
+**/.angular
+client
+docs
+*.md
